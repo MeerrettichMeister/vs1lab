@@ -9,39 +9,39 @@
 /* Global styling */
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 
-  /* This approach prevents issues with 3rd party content-box components */
-  box-sizing: inherit;
+    /* This approach prevents issues with 3rd party content-box components */
+    box-sizing: inherit;
 }
 
 
 /* Variables (example: see declaration for "a" below) */
 
 :root {
-  --link-color: #00B7FF;
-  --background-color: #efefef;
-  --border-color: #cdcdcd;
-  --gray-color: #666;
+    --link-color: #00B7FF;
+    --background-color: #efefef;
+    --border-color: #cdcdcd;
+    --gray-color: #666;
 }
 
 
 /* HTML element styles */
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 a {
-  color: var(--link-color);
+    color: var(--link-color);
 }
 
 /* ### TODO ### Styles for other HTML elements */
@@ -52,74 +52,117 @@ a {
 /* Grid styles (no changes required) */
 
 .row {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
 }
 
 .col-1 {
-  width: calc(8.33% - 1rem);
+    width: calc(8.33% - 1rem);
 }
 
 .col-2 {
-  width: calc(16.66% - 1rem);
+    width: calc(16.66% - 1rem);
 }
 
 .col-3 {
-  width: calc(25% - 1rem);
+    width: calc(25% - 1rem);
 }
 
 .col-4 {
-  width: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
 }
 
 .col-5 {
-  width: calc(41.66% - 1rem);
+    width: calc(41.66% - 1rem);
 }
 
 .col-6 {
-  width: calc(50% - 1rem);
+    width: calc(50% - 1rem);
 }
 
 .col-7 {
-  width: calc(58.33% - 1rem);
+    width: calc(58.33% - 1rem);
 }
 
 .col-8 {
-  width: calc(66.66% - 1rem);
+    width: calc(66.66% - 1rem);
 }
 
 .col-9 {
-  width: calc(75% - 1rem);
+    width: calc(75% - 1rem);
 }
 
 .col-10 {
-  width: calc(83.33% - 1rem);
+    width: calc(83.33% - 1rem);
 }
 
 .col-11 {
-  width: calc(91.66% - 1rem);
+    width: calc(91.66% - 1rem);
 }
 
 .col-12 {
-  width: calc(100% - 1rem);
+    width: calc(100% - 1rem);
 }
 
 
 /* ### TODO ### Styles for Header Component */
+.header {
+    background-color: #e1e1e1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 3rem;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #bcbcbc;
+}
 
-/* ... your code here ... */
+.header__image {
+    width: 3%;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
 
 
 /* ### TODO ### Styles for Tagging component */
 
-/* ... your code here ... */
+.main__tagging {
+    padding: 2rem;
+    min-width: 15%;
+
+    .tagging_set {
+        margin-top: 1rem;
+    }
+
+    .tagging_legend {
+        margin-left: 1.5rem;
+    }
+
+    .tagging_form {
+        margin-right: 1rem;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tagging_form_group {
+        display: flex;
+        flex-direction: column;
+        margin: 7px;
+    }
+}
 
 
 /* ### TODO ### Styles for Discovery component */
