@@ -115,31 +115,18 @@ a {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    padding: 3rem;
+    padding: 2.5rem;
     border-bottom-style: solid;
     border-bottom-width: thin;
     border-bottom-color: #bcbcbc;
-}
-
-.footer {
-    background-color: #e1e1e1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: center;
-    padding: 3rem;
-    border-top-style: solid;
-    border-top-width: thin;
-    border-top-color: #bcbcbc;
 }
 
 .header__image {
     width: 3%;
 }
 
-
 /* ### TODO ### Styles for Main Component */
+
 
 .main {
     display: flex;
@@ -148,8 +135,8 @@ a {
 
 }
 
-
 /* ### TODO ### Styles for Tagging component */
+
 
 .main__tagging {
     padding: 2rem;
@@ -177,11 +164,10 @@ a {
     }
 }
 
-
 /* ### TODO ### Styles for Discovery component */
 
+
 .main__discovery {
-    background-color: red;
     padding: 2rem;
     min-width: 85%;
 
@@ -211,24 +197,45 @@ a {
         justify-content: flex-start;
     }
     .discovery__results{
+        padding-top: 1rem;
+        list-style-type: none;
         display: flex;
         flex-direction: column;
     }
-    .discovery__results{
+    .discovery__results li{
+        background-color: #e1e1e1;
+        padding: 1rem;
+        border: 1px #bcbcbc solid;
     }
 
     .discovery__map {
         display: flex;
         flex-direction: column;
         padding: 1rem;
-        width: 25%;
+        width: 30%;
     }
 }
 
-
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+
+.footer {
+    background-color: #e1e1e1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    padding: 2rem;
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: thin;
+    border-top-color: #bcbcbc;
+}
+
+
 
 
 /* ### TODO ### Media Queries */
