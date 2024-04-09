@@ -25,9 +25,9 @@
     <section class="main__tagging tagging">
         <h2>Tagging</h2>
         <!-- ############### VS1Lab 1a Form 1 Start -->
-        <fieldset class="tagging_set">
-            <legend class="tagging_legend">Add a new GeoTag</legend>
-            <form id="tag-form" action="/tagging" method="post">
+        <form id="tag-form" action="/tagging" method="post">
+            <fieldset class="tagging_set">
+                <legend class="tagging_legend">Add a new GeoTag</legend>
                 <div class="tagging_form">
                     <div class="tagging_form_group">
                         <label for="lat">Latitude:</label>
@@ -49,9 +49,8 @@
                         <button>Add Tag</button>
                     </div>
                 </div>
-            </form>
-
-        </fieldset>
+            </fieldset>
+        </form>
         <!-- ############### VS1Lab 1a Form 1 End -->
 
     </section>
@@ -61,7 +60,18 @@
 
         <!-- ############### VS1Lab 1a Form 2 Start -->
         <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
-
+            <fieldset class="discovery_set">
+                <legend class="discovery_legend">Search</legend>
+                <div class="discovery_form">
+                    <div class="discovery_form_group">
+                        <label for="disc_word_search">Search term or keywords:</label>
+                        <input type="text" id="disc_word_search">
+                    </div>
+                    <div class="discovery_form_group">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </fieldset>
             <!-- ... your code here ... -->
 
         </form>

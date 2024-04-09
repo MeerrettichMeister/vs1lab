@@ -121,6 +121,19 @@ a {
     border-bottom-color: #bcbcbc;
 }
 
+.footer {
+    background-color: #e1e1e1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 3rem;
+    border-top-style: solid;
+    border-top-width: thin;
+    border-top-color: #bcbcbc;
+}
+
 .header__image {
     width: 3%;
 }
@@ -167,7 +180,50 @@ a {
 
 /* ### TODO ### Styles for Discovery component */
 
-/* ... your code here ... */
+.main__discovery {
+    background-color: red;
+    padding: 2rem;
+    min-width: 85%;
+
+    .discovery_set {
+        margin-top: 1rem;
+    }
+
+    .discovery_legend {
+        margin-left: 1.5rem;
+    }
+
+    .discovery_form {
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .discovery_form_group {
+        display: flex;
+        flex-direction: column;
+        margin: 7px;
+        max-width: 15%;
+    }
+    .discovery__wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .discovery__results{
+        display: flex;
+        flex-direction: column;
+    }
+    .discovery__results{
+    }
+
+    .discovery__map {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        width: 25%;
+    }
+}
 
 
 /* ### TODO ### Styles for Footer Component */
