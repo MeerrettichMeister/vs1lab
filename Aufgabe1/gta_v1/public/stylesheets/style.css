@@ -54,6 +54,12 @@ input {
     height:2rem;
     padding: 0.5rem;
 }
+
+input:disabled {
+    background-color: #DDDDDD;
+    border: solid thin #cecece;
+}
+
 button {
     height:2rem;
     border: solid thin #cecece;
