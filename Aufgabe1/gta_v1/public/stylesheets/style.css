@@ -152,8 +152,10 @@ button {
 
 
 .main__tagging {
-    padding: 2rem;
-    min-width: 15%;
+    margin: 2rem;
+
+    flex-grow: 1;
+    flex-shrink: 0;
 
     .tagging_set {
         margin-top: 1rem;
@@ -181,8 +183,10 @@ button {
 
 
 .main__discovery {
-    padding: 2rem;
-    min-width: 85%;
+    margin: 2rem 2rem 2rem 0;
+
+    flex-grow: 1;
+    flex-shrink: 1;
 
     .discovery_set {
         margin-top: 1rem;
@@ -201,7 +205,7 @@ button {
     .discovery_form_group {
         display: flex;
         flex-direction: column;
-        margin: 7px;
+        margin: 1rem;
         max-width: 15%;
     }
     .discovery__wrapper{
@@ -227,7 +231,7 @@ button {
         display: flex;
         flex-direction: column;
         padding: 1rem;
-        width: 30%;
+        max-width: 14rem;
     }
 }
 
@@ -241,7 +245,7 @@ button {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     padding: 2rem;
     width: 100%;
