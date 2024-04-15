@@ -219,6 +219,7 @@ button {
     }
     .discovery__taglist {
         min-width: 30ch;
+        flex-grow: 1;
     }
 
     .discovery__results{
@@ -238,7 +239,7 @@ button {
         display: flex;
         flex-direction: column;
         flex-shrink: 1;
-        min-width: 10rem;
+        min-width: 8rem;
     }
 
     .discovery__map img {
@@ -282,6 +283,14 @@ button {
 @media (min-width: 576px) {
     .main__discovery {
         margin: 2rem 2rem 2rem 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .main__discovery {
+        .discovery__wrapper {
+            flex-wrap: nowrap;
+        }
     }
 }
 
