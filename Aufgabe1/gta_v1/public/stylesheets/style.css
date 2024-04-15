@@ -212,9 +212,17 @@ button {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-    }
-    .discovery__results{
+
         padding-top: 1rem;
+        gap: 1rem;
+
+        flex-wrap: wrap;
+    }
+    .discovery__taglist {
+        min-width: 30ch;
+    }
+
+    .discovery__results{
         list-style-type: none;
         display: flex;
         flex-direction: column;
@@ -230,8 +238,13 @@ button {
     .discovery__map {
         display: flex;
         flex-direction: column;
-        padding: 1rem;
-        max-width: 14rem;
+        flex-shrink: 1;
+        min-width: 10rem;
+    }
+
+    .discovery__map img {
+        max-width: 100%;
+        height: auto;
     }
 }
 
