@@ -175,7 +175,7 @@ button {
     .tagging_form_group {
         display: flex;
         flex-direction: column;
-        margin: 7px;
+        margin: .5rem;
     }
 }
 
@@ -197,7 +197,6 @@ button {
     }
 
     .discovery_form {
-        margin-left: 1rem;
         display: flex;
         flex-direction: column;
     }
@@ -205,8 +204,8 @@ button {
     .discovery_form_group {
         display: flex;
         flex-direction: column;
-        margin: 1rem;
-        max-width: 15%;
+        margin: 1rem 1.5rem;
+        max-width: 40ch;
     }
     .discovery__wrapper{
         display: flex;
