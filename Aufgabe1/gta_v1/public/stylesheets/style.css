@@ -141,12 +141,6 @@ button {
 /* ### TODO ### Styles for Main Component */
 
 
-.main {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-
-}
 
 /* ### TODO ### Styles for Tagging component */
 
@@ -183,7 +177,7 @@ button {
 
 
 .main__discovery {
-    margin: 2rem 2rem 2rem 0;
+    margin: 2rem;
 
     flex-grow: 1;
     flex-shrink: 1;
@@ -270,5 +264,19 @@ button {
 
 
 /* ### TODO ### Media Queries */
+
+@media (min-width: 576px) {
+    .main {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+@media (min-width: 576px) {
+    .main__discovery {
+        margin: 2rem 2rem 2rem 0;
+    }
+}
 
 /* ... your code here ... */
