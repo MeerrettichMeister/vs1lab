@@ -39,11 +39,11 @@
                     </div>
                     <div class="tagging_form_group">
                         <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" placeholder="e.g. Central Berlin">
+                        <input type="text" id="name" name="name" placeholder="e.g. Central Berlin" required maxlength="10">
                     </div>
                     <div class="tagging_form_group">
                         <label for="hashtag">Hashtag:</label>
-                        <input type="text" id="hashtag" name="hashtag" placeholder="e.g. #ber">
+                        <input type="text" id="hashtag" name="hashtag" placeholder="e.g. #ber" pattern="#[a-zA-Z]{1,10}">
                     </div>
                     <div class="tagging_form_group">
                         <button>Add Tag</button>
