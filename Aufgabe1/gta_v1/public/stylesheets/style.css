@@ -130,9 +130,7 @@ button {
     flex-direction: column;
     min-height: 100svh;
 }
-.main{
-    flex-grow:1 ;
-}
+
 /* ### TODO ### Styles for Header Component */
 .header {
     background-color: #efefef;
@@ -153,16 +151,15 @@ button {
 
 /* ### TODO ### Styles for Main Component */
 
-
+.main{
+    flex-grow:1;
+}
 
 /* ### TODO ### Styles for Tagging component */
 
 
-.main__tagging {
+.tagging {
     margin: 2rem;
-
-    flex-grow: 1;
-    flex-shrink: 0;
 
     .tagging_set {
         margin-top: 1rem;
@@ -189,11 +186,8 @@ button {
 /* ### TODO ### Styles for Discovery component */
 
 
-.main__discovery {
+.discovery {
     margin: 2rem;
-
-    flex-grow: 1;
-    flex-shrink: 1;
 
     .discovery_set {
         margin-top: 1rem;
@@ -215,18 +209,9 @@ button {
         max-width: 40ch;
     }
     .discovery__wrapper{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-
         padding-top: 1rem;
         gap: 1rem;
-
-        flex-wrap: wrap;
-    }
-    .discovery__taglist {
-        min-width: 30ch;
-        flex-grow: 1;
+        justify-content: flex-start;
     }
 
     .discovery__results{
@@ -276,25 +261,12 @@ button {
 
 /* ### TODO ### Media Queries */
 
-@media (min-width: 576px) {
-    .main {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
+@media (max-width: 576px) {
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10,.col-11,.col-12 {
+        width: calc(100%)!important;
     }
-}
-
-@media (min-width: 576px) {
-    .main__discovery {
-        margin: 2rem 2rem 2rem 0;
-    }
-}
-
-@media (min-width: 768px) {
-    .main__discovery {
-        .discovery__wrapper {
-            flex-wrap: nowrap;
-        }
+    .row{
+        flex-wrap: wrap;
     }
 }
 
