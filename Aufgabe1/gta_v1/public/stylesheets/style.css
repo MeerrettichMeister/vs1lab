@@ -125,7 +125,14 @@ button {
     width: calc(100% - 1rem);
 }
 
-
+.mainpage{
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+}
+.main{
+    flex-grow:1 ;
+}
 /* ### TODO ### Styles for Header Component */
 .header {
     background-color: #efefef;
@@ -258,10 +265,7 @@ button {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    position: sticky;
-    bottom: 0;
     padding: 2rem;
-    width: 100%;
     border-top-style: solid;
     border-top-width: thin;
     border-top-color: #cecece;
