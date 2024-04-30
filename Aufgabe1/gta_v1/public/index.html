@@ -69,8 +69,8 @@
                             <label for="disc_word_search">Search term or keywords:</label>
                             <input type="text" id="disc_word_search" placeholder="e.g. Berlin">
                         </div>
-                        <input type="hidden" name="longitude">
-                        <input type="hidden" name="latitude">
+                        <input id="discovery_long" type="hidden" name="longitude">
+                        <input id="discovery_lat" type="hidden" name="latitude">
                         <div class="discovery_form_group">
                             <button>Search</button>
                         </div>
@@ -89,7 +89,7 @@
                     </ul>
                 </div>
 
-                <div class="discovery__map col-4">
+                <div class="discovery__map col-8">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView"/>
                     <span>Result map</span>
                 </div>
