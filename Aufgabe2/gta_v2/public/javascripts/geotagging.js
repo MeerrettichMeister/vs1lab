@@ -132,7 +132,9 @@ function updateLocation() {
         const mapElement = document.createElement('div');
         mapElement.setAttribute("id", "map");
         document.getElementById('mapView').replaceWith(mapElement)
-        new MapManager().initMap(lat,long);
+        const map = new MapManager();
+        map.initMap(lat,long);
+        map.updateMarkers(lat,long);
     }));
 
 
