@@ -256,8 +256,9 @@ button {
     border-top-color: #cecece;
 }
 
-
-
+#map {
+    height: 500px;
+}
 
 /* ### TODO ### Media Queries */
 
