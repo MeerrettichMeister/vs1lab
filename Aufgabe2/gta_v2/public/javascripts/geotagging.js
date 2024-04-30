@@ -10,8 +10,8 @@
 console.log("The geoTagging script is going to start...");
 
 /**
-  * A class to help using the HTML5 Geolocation API.
-  */
+ * A class to help using the HTML5 Geolocation API.
+ */
 class LocationHelper {
     // Location values for latitude and longitude are private properties to protect them from changes.
     #latitude = '';
@@ -29,15 +29,15 @@ class LocationHelper {
         return this.#longitude;
     }
 
-   /**
-    * Create LocationHelper instance if coordinates are known.
-    * @param {string} latitude 
-    * @param {string} longitude 
-    */
-   constructor(latitude, longitude) {
-       this.#latitude = (parseFloat(latitude)).toFixed(5);
-       this.#longitude = (parseFloat(longitude)).toFixed(5);
-   }
+    /**
+     * Create LocationHelper instance if coordinates are known.
+     * @param {string} latitude
+     * @param {string} longitude
+     */
+    constructor(latitude, longitude) {
+        this.#latitude = (parseFloat(latitude)).toFixed(5);
+        this.#longitude = (parseFloat(longitude)).toFixed(5);
+    }
 
     /**
      * The 'findLocation' method requests the current location details through the geolocation API.
@@ -62,7 +62,7 @@ class LocationHelper {
             // Pass the locationHelper object to the callback.
             callback(helper);
         }, (error) => {
-           alert(error.message)
+            alert(error.message)
         });
     }
 }
@@ -76,27 +76,28 @@ class MapManager {
     #markers
 
     /**
-    * Initialize a Leaflet map
-    * @param {number} latitude The map center latitude
-    * @param {number} longitude The map center longitude
-    * @param {number} zoom The map zoom, defaults to 18
-    */
+     * Initialize a Leaflet map
+     * @param {number} latitude The map center latitude
+     * @param {number} longitude The map center longitude
+     * @param {number} zoom The map zoom, defaults to 18
+     */
     initMap(latitude, longitude, zoom = 18) {
         // set up dynamic Leaflet map
         this.#map = L.map('map').setView([latitude, longitude], zoom);
         var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; ' + mapLink + ' Contributors'}).addTo(this.#map);
+                attribution: '&copy; ' + mapLink + ' Contributors'
+            }).addTo(this.#map);
         this.#markers = L.layerGroup().addTo(this.#map);
     }
 
     /**
-    * Update the Markers of a Leaflet map
-    * @param {number} latitude The map center latitude
-    * @param {number} longitude The map center longitude
-    * @param {{latitude, longitude, name}[]} tags The map tags, defaults to just the current location
-    */
+     * Update the Markers of a Leaflet map
+     * @param {number} latitude The map center latitude
+     * @param {number} longitude The map center longitude
+     * @param {{latitude, longitude, name}[]} tags The map tags, defaults to just the current location
+     */
     updateMarkers(latitude, longitude, tags = []) {
         // delete all markers
         this.#markers.clearLayers();
@@ -104,9 +105,9 @@ class MapManager {
             .bindPopup("Your Location")
             .addTo(this.#markers);
         for (const tag of tags) {
-            L.marker([tag.location.latitude,tag.location.longitude])
+            L.marker([tag.location.latitude, tag.location.longitude])
                 .bindPopup(tag.name)
-                .addTo(this.#markers);  
+                .addTo(this.#markers);
         }
     }
 }
@@ -119,11 +120,19 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation() {
+    let lat;
+    let long;
     LocationHelper.findLocation(((el) => {
-        document.getElementById('latitude').value = el.latitude;
-        document.getElementById('longitude').value = el.longitude;
-        document.getElementById('discovery_lat').value = el.latitude;
-        document.getElementById('discovery_long').value = el.longitude;
+        lat = el.latitude;
+        long = el.longitude;
+        document.getElementById('latitude').setAttribute('value', lat);
+        document.getElementById('longitude').setAttribute('value', long);
+        document.getElementById('discovery_lat').setAttribute('value', lat);
+        document.getElementById('discovery_long').setAttribute('value', long);
+        const mapElement = document.createElement('div');
+        mapElement.setAttribute("id", "map");
+        document.getElementById('mapView').replaceWith(mapElement)
+        new MapManager().initMap(lat,long);
     }));
 
 
