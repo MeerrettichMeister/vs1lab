@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<!-- File origin: VS1LAB A1a -->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoTagApp</title>
+    <link rel="stylesheet" href="./stylesheets/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header class="header">
+        <img src="./images/location.png" class="header__image" alt="an image of a map and location">
+        <h1 class="header__title">GeoTagApp</h1>
+        <nav class="header__navigation">
+            <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
+        </nav>
+    </header>
+
+    <main class="main row">
+        <section class="tagging col-4">
+            <h2>Tagging</h2>
+            <!-- ############### VS1Lab 1a Form 1 Start -->
+            <form id="tag-form" action="/tagging" method="post">
+                <fieldset class="tagging_set">
+                    <legend class="tagging_legend">Add a new GeoTag</legend>
+                    <div class="tagging_form">
+                        <div class="tagging_form_group">
+                            <label for="latitude">Latitude:</label>
+                            <input type="text" id="latitude" name="latitude" disabled value="20.10025">
+                        </div>
+                        <div class="tagging_form_group">
+                            <label for="longitude">Longitude:</label>
+                            <input type="text" id="longitude" name="longitude" disabled value="45.77524">
+                        </div>
+                        <div class="tagging_form_group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" placeholder="e.g. Central Berlin" required
+                                   maxlength="10">
+                        </div>
+                        <div class="tagging_form_group">
+                            <label for="hashtag">Hashtag:</label>
+                            <input type="text" id="hashtag" name="hashtag" placeholder="e.g. #ber"
+                                   pattern="#[a-zA-Z]{1,10}">
+                        </div>
+                        <div class="tagging_form_group">
+                            <button>Add Tag</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- ############### VS1Lab 1a Form 1 End -->
+
+        </section>
+
+        <section class="discovery col-8">
+            <h2 class="discovery__title">Discovery</h2>
+
+            <!-- ############### VS1Lab 1a Form 2 Start -->
+            <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
+                <fieldset class="discovery_set">
+                    <legend class="discovery_legend">Search</legend>
+                    <div class="discovery_form">
+                        <div class="discovery_form_group">
+                            <label for="disc_word_search">Search term or keywords:</label>
+                            <input type="text" id="disc_word_search" placeholder="e.g. Berlin">
+                        </div>
+                        <input id="discovery_long" type="hidden" name="longitude">
+                        <input id="discovery_lat" type="hidden" name="latitude">
+                        <div class="discovery_form_group">
+                            <button>Search</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- ... your code here ... -->
+
+            </form>
+            <!-- ############### VS1Lab 1a Form 2 End -->
+
+            <div class="discovery__wrapper row">
+                <div class="discovery__taglist col-4">
+                    <ul class="discovery__results" id="discoveryResults">
+                        <li>Castle (49.01379, 8.404435) #sight</li>
+                        <li>IWI (49.01379, 8.390071) #edu</li>
+                    </ul>
+                </div>
+
+                <div class="discovery__map col-8">
+                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView"/>
+                    <span>Result map</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <span>(c) 2021/22 HKA_IWI_VSYS</span>
+    </footer>
+</body>
+
+</html>
