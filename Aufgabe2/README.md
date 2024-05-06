@@ -110,6 +110,6 @@ Zur Übersicht folgen noch mal alle Anforderungen in kompakter Form als Checklis
 
 ### 2. Teilaufgabe: Karte darstellen
 
-- [ ] `updateLocation`-Funktion ergänzen
-  - [ ] Funktionen `initMap` und `updateMarkers` aufrufen
-  - [ ] `img` und `p`-Elemente mit DOM-Funktionen entfernen
+- [x] `updateLocation`-Funktion ergänzen
+  - [x] Funktionen `initMap` und `updateMarkers` aufrufen
+  - [x] `img` und `p`-Elemente mit DOM-Funktionen entfernen
