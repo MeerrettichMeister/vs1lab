@@ -131,7 +131,8 @@ function updateLocation() {
         document.getElementById('discovery_long').setAttribute('value', long);
         const mapElement = document.createElement('div');
         mapElement.setAttribute("id", "map");
-        document.getElementById('mapView').replaceWith(mapElement)
+        document.getElementById('mapView').nextElementSibling.remove();
+        document.getElementById('mapView').replaceWith(mapElement);
         const map = new MapManager();
         map.initMap(lat,long);
         const taglistHTML = document.getElementById('discoveryResults').getElementsByTagName('li');
