@@ -134,20 +134,22 @@ function updateLocation() {
         document.getElementById('mapView').nextElementSibling.remove();
         document.getElementById('mapView').replaceWith(mapElement);
         const map = new MapManager();
-        map.initMap(lat,long);
+        map.initMap(lat, long);
         const taglistHTML = document.getElementById('discoveryResults').getElementsByTagName('li');
         let tagList = Array();
         for (let i = 0; i < taglistHTML.length; i++) {
-            const body = taglistHTML.item(i).innerText.replace(',','').split(/\s/);
-            const name = body.pop();
-            const longString = body.pop();
-            const latString = body.pop();
-            const tag = {location:{latitude: latString.replace(/[()']+/g,''),
-                longitude: longString.replace(/[()']+/g,'')},
-            name: name};
+            const body = taglistHTML.item(i).innerText.replace(',', '').split(/\s/);
+            const [name, latString, longString, hashtag] = body;
+            const tag = {
+                location: {
+                    latitude: latString.replace(/[()']+/g, ''),
+                    longitude: longString.replace(/[()']+/g, '')
+                },
+                name: name
+            };
             tagList.push(tag);
         }
-        map.updateMarkers(lat,long,tagList);
+        map.updateMarkers(lat, long, tagList);
     }));
 
 
