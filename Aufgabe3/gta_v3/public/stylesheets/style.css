@@ -1,0 +1,274 @@
+/*
+  File origin: VS1LAB A1b  
+
+  CSS style is BEM. Classes used for CSS, IDs for JavaScript querying (future use).
+  CSS variables used for clarity and themability (e.g. through SSR). 
+  Inherited box sizing used for ease of including 3rd party content-box components.
+*/
+
+/* Global styling */
+
+html {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    /* This approach prevents issues with 3rd party content-box components */
+    box-sizing: inherit;
+}
+
+
+/* Variables (example: see declaration for "a" below) */
+
+:root {
+    --link-color: #00B7FF;
+    --background-color: #efefef;
+    --border-color: #cdcdcd;
+    --gray-color: #666;
+}
+
+
+/* HTML element styles */
+
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--link-color);
+}
+
+/* ### TODO ### Styles for other HTML elements */
+
+label {
+    color: #848484;
+    margin-bottom: 0.2rem;
+}
+input {
+    height:2rem;
+    padding: 0.5rem;
+}
+
+input:disabled {
+    background-color: #DDDDDD;
+    border: solid thin #cecece;
+}
+
+button {
+    height:2rem;
+    border: solid thin #cecece;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+
+/* Grid styles (no changes required) */
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.col-1 {
+    width: calc(8.33% - 1rem);
+}
+
+.col-2 {
+    width: calc(16.66% - 1rem);
+}
+
+.col-3 {
+    width: calc(25% - 1rem);
+}
+
+.col-4 {
+    width: calc(33.33% - 1rem);
+}
+
+.col-5 {
+    width: calc(41.66% - 1rem);
+}
+
+.col-6 {
+    width: calc(50% - 1rem);
+}
+
+.col-7 {
+    width: calc(58.33% - 1rem);
+}
+
+.col-8 {
+    width: calc(66.66% - 1rem);
+}
+
+.col-9 {
+    width: calc(75% - 1rem);
+}
+
+.col-10 {
+    width: calc(83.33% - 1rem);
+}
+
+.col-11 {
+    width: calc(91.66% - 1rem);
+}
+
+.col-12 {
+    width: calc(100% - 1rem);
+}
+
+.mainpage{
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+}
+
+/* ### TODO ### Styles for Header Component */
+.header {
+    background-color: #efefef;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 2.5rem;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #cecece;
+}
+
+.header__image {
+    width: 2rem;
+}
+
+/* ### TODO ### Styles for Main Component */
+
+.main{
+    flex-grow:1;
+}
+
+/* ### TODO ### Styles for Tagging component */
+
+
+.tagging {
+    margin: 2rem;
+
+    .tagging_set {
+        margin-top: 1rem;
+    }
+
+    .tagging_legend {
+        margin-left: 1.5rem;
+    }
+
+    .tagging_form {
+        margin-right: 1rem;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tagging_form_group {
+        display: flex;
+        flex-direction: column;
+        margin: .5rem;
+    }
+}
+
+/* ### TODO ### Styles for Discovery component */
+
+
+.discovery {
+    margin: 2rem;
+
+    .discovery_set {
+        margin-top: 1rem;
+    }
+
+    .discovery_legend {
+        margin-left: 1.5rem;
+    }
+
+    .discovery_form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .discovery_form_group {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 1.5rem;
+        max-width: 40ch;
+    }
+    .discovery__wrapper{
+        padding-top: 1rem;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+
+    .discovery__results{
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+    }
+    .discovery__results li{
+        background-color: #efefef;
+        padding: 1rem;
+        border: 1px #bcbcbc solid;
+        color: #0cbafe;
+        font-weight: bold;
+    }
+
+    .discovery__map {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 1;
+        min-width: 8rem;
+    }
+
+    .discovery__map img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* ### TODO ### Styles for Footer Component */
+
+
+.footer {
+    background-color: #efefef;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 2rem;
+    border-top-style: solid;
+    border-top-width: thin;
+    border-top-color: #cecece;
+}
+
+#map {
+    height: 500px;
+}
+
+/* ### TODO ### Media Queries */
+
+@media (max-width: 576px) {
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10,.col-11,.col-12 {
+        width: calc(100%)!important;
+    }
+    .row{
+        flex-wrap: wrap;
+    }
+}
+
+/* ... your code here ... */
