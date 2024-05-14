@@ -122,7 +122,7 @@ class MapManager {
 function updateLocation() {
     let lat;
     let long;
-    LocationHelper.findLocation(((el) => {
+    LocationHelper.findLocation(function (el) {
         lat = el.latitude;
         long = el.longitude;
         document.getElementById('latitude').setAttribute('value', lat);
@@ -150,7 +150,7 @@ function updateLocation() {
             tagList.push(tag);
         }
         map.updateMarkers(lat, long, tagList);
-    }));
+    });
 
 
 }
