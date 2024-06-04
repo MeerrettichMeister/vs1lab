@@ -12,7 +12,19 @@
 class GeoTag {
 
     // TODO: ... your code here ...
-    
+
+    tagName;
+    lat;
+    long;
+    tag;
+
+
+    constructor(tagName, lat, long, tag) {
+        this.tagName = tagName;
+        this.lat = lat;
+        this.long = long;
+        this.tag = tag;
+    }
 }
 
 module.exports = GeoTag;
