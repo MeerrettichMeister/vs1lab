@@ -38,11 +38,11 @@
                 <div class="tagging_form">
                     <div class="tagging_form_group">
                         <label for="latitude">Latitude:</label>
-                        <input type="text" id="latitude" name="latitude" disabled value="20.10025">
+                        <input type="text" id="latitude" name="latitude" disabled value="<%= lat ?? "aeiou" %>">
                     </div>
                     <div class="tagging_form_group">
                         <label for="longitude">Longitude:</label>
-                        <input type="text" id="longitude" name="longitude" disabled value="45.77524">
+                        <input type="text" id="longitude" name="longitude" disabled value="<%= lon ?? "" %>">
                     </div>
                     <div class="tagging_form_group">
                         <label for="name">Name:</label>
@@ -76,8 +76,8 @@
                         <label for="disc_word_search">Search term or keywords:</label>
                         <input type="text" id="disc_word_search" placeholder="e.g. Berlin">
                     </div>
-                    <input id="discovery_long" type="hidden" name="longitude">
-                    <input id="discovery_lat" type="hidden" name="latitude">
+                    <input id="discovery_long" type="hidden" name="longitude" value="<%= lon ?? "" %>">
+                    <input id="discovery_lat" type="hidden" name="latitude" value="<%= lat ?? "" %>">
                     <div class="discovery_form_group">
                         <button>Search</button>
                     </div>

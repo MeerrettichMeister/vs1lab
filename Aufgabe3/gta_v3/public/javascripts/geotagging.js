@@ -150,7 +150,14 @@ function updateLocation() {
             tagList.push(tag);
         }
         map.updateMarkers(lat, long, tagList);
-    });
+
+        history.replaceState(null, "",
+            "?" + new URLSearchParams({
+                    lat: lat,
+                    lon: long
+                }).toString()
+            );}
+    );
 
 
 }

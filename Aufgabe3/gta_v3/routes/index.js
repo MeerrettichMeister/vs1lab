@@ -42,7 +42,8 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  console.log(req.query);
+  res.render('index', { taglist: [], lat: req.query.lat, lon: req.query.lon })
 });
 
 /**
@@ -61,7 +62,9 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
-
+router.post('/tagging', (req, res) => {
+  res.send({x: 'foo'})
+});
 /**
  * Route '/discovery' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -79,5 +82,7 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
-
+router.post('/discovery', (req, res) => {
+  res.send()
+});
 module.exports = router;
