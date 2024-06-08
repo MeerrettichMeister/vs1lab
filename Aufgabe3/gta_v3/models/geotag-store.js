@@ -5,7 +5,7 @@
  * Complete all TODOs in the code documentation.
  */
 
-const {tagList} = require("./geotag-examples");
+const GeoTagExamples = require("./geotag-examples");
 const GeoTag = require("./geotag");
 
 /**
@@ -27,23 +27,34 @@ const GeoTag = require("./geotag");
  * - Keyword matching should include partial matches from name or hashtag fields.
  */
 class InMemoryGeoTagStore {
-
-    // TODO: ... your code here ...
-
-    #tagList;
+    /**
+     * @type {GeoTag[]}
+     */
+    #tagList = GeoTagExamples.tagList();
 
     constructor() {
-        tagList().forEach((el) => {
-            this.addGeoTag(el[0], el[1], el[2], el[3]);
-        })
     }
 
+    /**
+     * Add new geotag
+     * @param {string} name
+     * @param {number} lat
+     * @param {number} long
+     * @param {string} tag
+     */
     addGeoTag(name, lat, long, tag) {
         this.#tagList.push(new GeoTag(name, lat, long, tag));
     }
 
+    /**
+     * Remove tag by name
+     * @param {string} name
+     */
     removeGeoTag(name) {
-        this.#tagList.splice(this.#tagList.indexOf(this.#tagList.reduce((el) => el.name === name)), 1);
+        const el = this.#tagList.findIndex(el => el.tagName === name);
+        if (el) {
+            this.#tagList.splice(el, 1);
+        }
     }
 
     /**
@@ -78,14 +89,33 @@ class InMemoryGeoTagStore {
         return earthRadius * c;
     }
 
+    /**
+     * Find geotags near point
+     *
+     * @param {number} lat
+     * @param {number} long
+     * @param {number} radius
+     * @returns {GeoTag[]}
+     */
     getNearbyGeoTags(lat, long, radius) {
-        return this.#tagList.filter((el) => (this.#distance({lat, lon: long}, {lat: el.lat, lon: el.long}) <= radius))
+        return this.#tagList.filter((el) =>
+            (this.#distance({lat, lon: long}, {lat: el.lat, lon: el.long}) <= radius)
+        );
     }
 
+    /**
+     * Search geotags near point
+     *
+     * @param {number} lat
+     * @param {number} long
+     * @param {number} radius
+     * @param {string} seatchTerm
+     * @returns {GeoTag[]}
+     */
     searchNearbyGeoTags(lat, long, radius, seatchTerm) {
-        return this.getNearbyGeoTags(lat, long, radius).filter((el) => {
-            return (el.name.contains(seatchTerm) || el.tag.contains(seatchTerm))
-        })
+        return this.getNearbyGeoTags(lat, long, radius).filter(
+            (el) => (el.tagName.contains(seatchTerm) || el.tag.contains(seatchTerm))
+        );
     }
 }
 
