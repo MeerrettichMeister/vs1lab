@@ -24,43 +24,29 @@ console.log("The geoTagging script is going to start...");
  */
 function setLocation(lat, long) {
     document.getElementById('latitude').setAttribute('value', lat);
+    document.getElementById('latitude_hidden').setAttribute('value', lat);
     document.getElementById('longitude').setAttribute('value', long);
+    document.getElementById('longitude_hidden').setAttribute('value', long);
     document.getElementById('discovery_lat').setAttribute('value', lat);
     document.getElementById('discovery_long').setAttribute('value', long);
-    const mapElement = document.createElement('div');
-    mapElement.setAttribute("id", "map");
-    document.getElementById('mapView').nextElementSibling.remove();
-    document.getElementById('mapView').replaceWith(mapElement);
+    document.getElementById('mapView').remove();
     const map = new MapManager();
-    map.initMap(lat, long);
-    const taglistHTML = document.getElementById('discoveryResults').getElementsByTagName('li');
-    let tagList = Array();
-    for (let i = 0; i < taglistHTML.length; i++) {
-        const body = taglistHTML.item(i).innerText.replace(',', '').split(/\s/);
-        const [name, latString, longString, hashtag] = body;
-        const tag = {
-            location: {
-                latitude: latString.replace(/[()']+/g, ''),
-                longitude: longString.replace(/[()']+/g, '')
-            },
-            name: name
-        };
-        tagList.push(tag);
-    }
-    map.updateMarkers(lat, long, tagList);
-
-    history.replaceState(null, "",
-        "?" + new URLSearchParams({
-            lat: lat,
-            lon: long
-        }).toString()
-    );
+    map.initMap(+lat, +long);
+    let tagList = JSON.parse(document.getElementById('map').getAttribute("data-tags"));
+    map.updateMarkers(+lat, +long, tagList.map(({tagName, lat, long}) => ({
+        name: tagName,
+        // function args typing is wrong! location is missing
+        location: {
+            latitude: lat,
+            longitude: long
+        },
+    })));
 }
 
 /**
  * Load coordinates from geolocator or previous state
  */
-function updateLocation(lat, lon) {
+function updateLocation() {
     // skip geolocation if previous location is known
     const previousLat = document.getElementById("latitude")?.value;
     const previousLong = document.getElementById("longitude")?.value;

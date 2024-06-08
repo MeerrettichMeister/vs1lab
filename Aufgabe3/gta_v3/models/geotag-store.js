@@ -30,7 +30,7 @@ class InMemoryGeoTagStore {
     /**
      * @type {GeoTag[]}
      */
-    #tagList = GeoTagExamples.tagList();
+    #tagList = GeoTagExamples.tagList.map(([name, lat, long, hashtag]) => new GeoTag(name, lat, long, hashtag));
 
     constructor() {
     }
@@ -40,7 +40,7 @@ class InMemoryGeoTagStore {
      * @param {string} name
      * @param {number} lat
      * @param {number} long
-     * @param {string} tag
+     * @param {string} [tag]
      */
     addGeoTag(name, lat, long, tag) {
         this.#tagList.push(new GeoTag(name, lat, long, tag));
@@ -99,7 +99,7 @@ class InMemoryGeoTagStore {
      */
     getNearbyGeoTags(lat, long, radius) {
         return this.#tagList.filter((el) =>
-            (this.#distance({lat, lon: long}, {lat: el.lat, lon: el.long}) <= radius)
+            this.#distance({lat, lon: long}, {lat: +el.lat, lon: +el.long}) <= radius
         );
     }
 
@@ -114,9 +114,9 @@ class InMemoryGeoTagStore {
      */
     searchNearbyGeoTags(lat, long, radius, seatchTerm) {
         return this.getNearbyGeoTags(lat, long, radius).filter(
-            (el) => (el.tagName.contains(seatchTerm) || el.tag.contains(seatchTerm))
+            (el) => (el.tagName.includes(seatchTerm) || el.tag.includes(seatchTerm))
         );
     }
 }
 
-module.exports = InMemoryGeoTagStore
+module.exports = InMemoryGeoTagStore;

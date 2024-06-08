@@ -31,19 +31,24 @@ const GeoTag = require('../models/geotag');
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
 
+const tagStore = new GeoTagStore();
+
 /**
  * Route '/' for HTTP 'GET' requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
  *
- * Requests cary no parameters
+ * Requests carry no parameters
  *
  * As response, the ejs-template is rendered without geotag objects.
  */
 
-// TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  console.log(req.query);
-  res.render('index', { taglist: [], lat: req.query.lat, lon: req.query.lon })
+  res.render('index', {
+        taglist: [],
+        lat: undefined,
+        lon: undefined
+      }
+  )
 });
 
 /**
@@ -63,8 +68,24 @@ router.get('/', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/tagging', (req, res) => {
-  res.send({x: 'foo'})
+  // sanitization? validation? what's that
+  const lat = +req.body.latitude;
+  const lon = +req.body.longitude;
+
+  tagStore.addGeoTag(
+      req.body.name,
+      lat,
+      lon,
+      req.body.hashtag
+  );
+
+  res.render('index', {
+    taglist: tagStore.getNearbyGeoTags(lat, lon, 25),
+    lat,
+    lon
+  })
 });
+
 /**
  * Route '/discovery' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -83,6 +104,16 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
-  res.send()
+  // sanitization? validation? what's that
+  const lat = +req.body.latitude;
+  const lon = +req.body.longitude;
+
+  console.log(lat, lon, tagStore.searchNearbyGeoTags(lat, lon, 25, req.body.search));
+
+  res.render('index', {
+    taglist: tagStore.searchNearbyGeoTags(lat, lon, 25, req.body.search),
+    lat,
+    lon
+  })
 });
 module.exports = router;

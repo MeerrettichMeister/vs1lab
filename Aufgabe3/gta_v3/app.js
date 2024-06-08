@@ -46,6 +46,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('public'));
 
+app.use(express.urlencoded({ extended: true }));
+
 // Set dedicated script for routing
 app.use('/', indexRouter);
 

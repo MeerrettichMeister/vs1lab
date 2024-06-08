@@ -23,7 +23,7 @@ class GeoTag {
      */
     #long;
     /**
-     * @type {string}
+     * @type {string | undefined}
      */
     #tag;
 
@@ -32,7 +32,7 @@ class GeoTag {
      * @param {string} tagName
      * @param {number} lat
      * @param {number} long
-     * @param {string} tag
+     * @param {string} [tag]
      */
     constructor(tagName, lat, long, tag) {
         this.#tagName = tagName;
@@ -41,20 +41,45 @@ class GeoTag {
         this.#tag = tag;
     }
 
+    /**
+     * @returns {string}
+     */
     get tagName() {
         return this.#tagName;
     }
 
+    /**
+     * @returns {number}
+     */
     get lat() {
         return this.#lat;
     }
 
+    /**
+     * @returns {number}
+     */
     get long() {
         return this.#long;
     }
 
+    /**
+     * @returns {string}
+     */
     get tag() {
         return this.#tag;
+    }
+
+    /**
+     * Serialization fn
+     * @returns {string}
+     */
+    toJSON() {
+        return {
+            tagName: this.#tagName,
+            lat: this.#lat,
+            long: this.#long,
+            tag: this.#tag ?? null,
+        };
     }
 }
 
