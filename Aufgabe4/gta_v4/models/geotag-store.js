@@ -57,6 +57,18 @@ class InMemoryGeoTagStore {
         }
     }
 
+
+    updateTag(name, content) {
+        let entryId = this.#tagList.findIndex(el => el.tagName === name);
+        this.#tagList[entryId] = content;
+        return this.#tagList[entryId];
+    }
+
+    findByName(name) {
+        return this.#tagList.find(el => el.tagName === name)
+    }
+
+
     /**
      * @param {number} degrees
      */

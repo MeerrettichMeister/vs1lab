@@ -43,12 +43,12 @@ const tagStore = new GeoTagStore();
  */
 
 router.get('/', (req, res) => {
-  res.render('index', {
-        taglist: [],
-        lat: undefined,
-        lon: undefined
-      }
-  )
+    res.render('index', {
+            taglist: [],
+            lat: undefined,
+            lon: undefined
+        }
+    )
 });
 
 /**
@@ -68,22 +68,22 @@ router.get('/', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/tagging', (req, res) => {
-  // sanitization? validation? what's that
-  const lat = +req.body.latitude;
-  const lon = +req.body.longitude;
+    // sanitization? validation? what's that
+    const lat = +req.body.latitude;
+    const lon = +req.body.longitude;
 
-  tagStore.addGeoTag(
-      req.body.name,
-      lat,
-      lon,
-      req.body.hashtag
-  );
+    tagStore.addGeoTag(
+        req.body.name,
+        lat,
+        lon,
+        req.body.hashtag
+    );
 
-  res.render('index', {
-    taglist: tagStore.getNearbyGeoTags(lat, lon, 25),
-    lat,
-    lon
-  })
+    res.render('index', {
+        taglist: tagStore.getNearbyGeoTags(lat, lon, 25),
+        lat,
+        lon
+    })
 });
 
 /**
@@ -104,17 +104,17 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
-  // sanitization? validation? what's that
-  const lat = +req.body.latitude;
-  const lon = +req.body.longitude;
+    // sanitization? validation? what's that
+    const lat = +req.body.latitude;
+    const lon = +req.body.longitude;
 
-  console.log(lat, lon, tagStore.searchNearbyGeoTags(lat, lon, 25, req.body.search));
+    console.log(lat, lon, tagStore.searchNearbyGeoTags(lat, lon, 25, req.body.search));
 
-  res.render('index', {
-    taglist: tagStore.searchNearbyGeoTags(lat, lon, 25, req.body.search),
-    lat,
-    lon
-  })
+    res.render('index', {
+        taglist: tagStore.searchNearbyGeoTags(lat, lon, 25, req.body.search),
+        lat,
+        lon
+    })
 });
 
 // API routes (A4)
@@ -133,6 +133,20 @@ router.post('/discovery', (req, res) => {
 
 // TODO: ... your code here ...
 
+router.get('/api/geotags', (req, res) => {
+
+    let resBody;
+    if (req.query.latitude && req.query.longitude) {
+        if (req.query.search) {
+            resBody = tagStore.searchNearbyGeoTags(req.query.latitude, req.query.longitude, req.query.rad ?? 25, req.query.search);
+        } else {
+            resBody = tagStore.getNearbyGeoTags(req.query.latitude, req.query.longitude, req.query.rad ?? 25)
+        }
+    }
+
+    res.send(resBody);
+
+})
 
 /**
  * Route '/api/geotags' for HTTP 'POST' requests.
@@ -147,6 +161,14 @@ router.post('/discovery', (req, res) => {
 
 // TODO: ... your code here ...
 
+router.post('/api/geotags', (req, res) => {
+
+    tagStore.addGeoTag(req.body['tagName'], req.body['lat'], req.body['long'], req.body['tag'])
+    let resBody = tagStore.findByName(req.body['tagName']);
+    res.location(`/api/geotags/${req.body['tagName']}`)
+    res.send(resBody);
+
+})
 
 /**
  * Route '/api/geotags/:id' for HTTP 'GET' requests.
@@ -160,6 +182,9 @@ router.post('/discovery', (req, res) => {
 
 // TODO: ... your code here ...
 
+router.get('/api/geotags/:id', (req, res) => {
+    res.send(tagStore.findByName(req.params.id));
+})
 
 /**
  * Route '/api/geotags/:id' for HTTP 'PUT' requests.
@@ -167,16 +192,19 @@ router.post('/discovery', (req, res) => {
  *
  * Requests contain the ID of a tag in the path.
  * (http://expressjs.com/de/4x/api.html#req.params)
- * 
+ *
  * Requests contain a GeoTag as JSON in the body.
  * (http://expressjs.com/de/4x/api.html#req.query)
  *
  * Changes the tag with the corresponding ID to the sent value.
- * The updated resource is rendered as JSON in the response. 
+ * The updated resource is rendered as JSON in the response.
  */
 
 // TODO: ... your code here ...
-
+router.put('/api/geotags/:id', (req, res) => {
+    const resBody = tagStore.updateTag(req.params.id, req.body);
+    res.send(resBody);
+})
 
 /**
  * Route '/api/geotags/:id' for HTTP 'DELETE' requests.
@@ -190,5 +218,9 @@ router.post('/discovery', (req, res) => {
  */
 
 // TODO: ... your code here ...
-
+router.delete('/api/geotags/:id', (req, res) => {
+    const resBody = tagStore.findByName(req.params.id);
+    tagStore.removeGeoTag(req.params.id);
+    res.send(resBody);
+})
 module.exports = router;
