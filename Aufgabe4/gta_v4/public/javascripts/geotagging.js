@@ -62,6 +62,10 @@ async function updateLocation() {
     }
 }
 
+const formatTag = (tag) => {
+    return `${tag.tagName} (${tag.lat}, ${tag.long})${tag ? ` ${tag.tag}` : ''}`;
+}
+
 async function searchTags() {
     /**
      * @type { HTMLInputElement | undefined }
@@ -95,7 +99,7 @@ async function searchTags() {
 
     for (const tag of json) {
         const el = document.createElement("li");
-        el.innerHTML = `${tag.tagName} (${tag.lat}, ${tag.long})${tag ? ` ${tag.tag}` : ''}`;
+        el.innerHTML = formatTag(tag);
         tagList.appendChild(el);
     }
 }
@@ -112,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data[key] = value;
         }
 
-        /*const response =*/ await fetch("/api/geotags", {
+        const response = await fetch("/api/geotags", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -121,9 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         // do something?
-        //const json = await response.json();
-
-        await searchTags();
+        const json = await response.json();
+        const tagList = document.getElementById("discoveryResults");
+        const el = document.createElement("li");
+        el.innerHTML = formatTag(json);
+        tagList.appendChild(el);
     });
 
     document.getElementById("discoveryFilterForm").addEventListener("submit", async (e) => {
