@@ -66,7 +66,6 @@ router.get('/', (req, res) => {
  * by radius around a given location.
  */
 
-// TODO: ... your code here ...
 router.post('/tagging', (req, res) => {
     // sanitization? validation? what's that
     const lat = +req.body.latitude;
@@ -102,7 +101,6 @@ router.post('/tagging', (req, res) => {
  * by radius and keyword.
  */
 
-// TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
     // sanitization? validation? what's that
     const lat = +req.body.latitude;
@@ -131,21 +129,27 @@ router.post('/discovery', (req, res) => {
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
 
-// TODO: ... your code here ...
-
 router.get('/api/geotags', (req, res) => {
-
     let resBody;
-    if (req.query.latitude && req.query.longitude) {
-        if (req.query.search) {
-            resBody = tagStore.searchNearbyGeoTags(req.query.latitude, req.query.longitude, req.query.rad ?? 25, req.query.search);
-        } else {
-            resBody = tagStore.getNearbyGeoTags(req.query.latitude, req.query.longitude, req.query.rad ?? 25)
-        }
+
+    if (req.query.latitude == null || req.query.longitude == null) {
+        res.status(422);
+        res.send();
+    }
+
+    const lat = +req.query.latitude;
+    const lon = +req.query.longitude;
+    const rad = req.query.rad !== undefined ? +req.query.rad : 25;
+
+    console.log(req.query.search);
+
+    if (req.query.search) {
+        resBody = tagStore.searchNearbyGeoTags(lat, lon, rad, req.query.search);
+    } else {
+        resBody = tagStore.getNearbyGeoTags(lat, lon, rad);
     }
 
     res.send(resBody);
-
 })
 
 /**
@@ -159,15 +163,13 @@ router.get('/api/geotags', (req, res) => {
  * The new resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
-
 router.post('/api/geotags', (req, res) => {
 
-    tagStore.addGeoTag(req.body['tagName'], req.body['lat'], req.body['long'], req.body['tag'])
+    tagStore.addGeoTag(req.body['tagName'], req.body['lat'], req.body['long'], req.body['tag']);
     let resBody = tagStore.findByName(req.body['tagName']);
-    res.location(`/api/geotags/${req.body['tagName']}`)
+    res.location(`/api/geotags/${req.body['tagName']}`);
+    res.status(201);
     res.send(resBody);
-
 })
 
 /**
@@ -179,8 +181,6 @@ router.post('/api/geotags', (req, res) => {
  *
  * The requested tag is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
 
 router.get('/api/geotags/:id', (req, res) => {
     res.send(tagStore.findByName(req.params.id));
@@ -200,7 +200,6 @@ router.get('/api/geotags/:id', (req, res) => {
  * The updated resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
 router.put('/api/geotags/:id', (req, res) => {
     const resBody = tagStore.updateTag(req.params.id, req.body);
     res.send(resBody);
@@ -217,7 +216,6 @@ router.put('/api/geotags/:id', (req, res) => {
  * The deleted resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
 router.delete('/api/geotags/:id', (req, res) => {
     const resBody = tagStore.findByName(req.params.id);
     tagStore.removeGeoTag(req.params.id);

@@ -121,12 +121,12 @@ class InMemoryGeoTagStore {
      * @param {number} lat
      * @param {number} long
      * @param {number} radius
-     * @param {string} seatchTerm
+     * @param {string} searchTerm
      * @returns {GeoTag[]}
      */
-    searchNearbyGeoTags(lat, long, radius, seatchTerm) {
+    searchNearbyGeoTags(lat, long, radius, searchTerm) {
         return this.getNearbyGeoTags(lat, long, radius).filter(
-            (el) => (el.tagName.includes(seatchTerm) || el.tag.includes(seatchTerm))
+            (el) => (el.tagName.includes(searchTerm) || el.tag.includes(searchTerm))
         );
     }
 }

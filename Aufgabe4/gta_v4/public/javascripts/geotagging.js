@@ -46,19 +46,90 @@ function setLocation(lat, long) {
 /**
  * Load coordinates from geolocator or previous state
  */
-function updateLocation() {
+async function updateLocation() {
     // skip geolocation if previous location is known
     const previousLat = document.getElementById("latitude")?.value;
     const previousLong = document.getElementById("longitude")?.value;
 
     if (previousLat == null || previousLat.length === 0 || previousLong == null || previousLong.value === 0) {
-        LocationHelper.findLocation((e) => setLocation(e.latitude, e.longitude));
+        LocationHelper.findLocation((e) => {
+            setLocation(e.latitude, e.longitude);
+            searchTags();
+        });
     } else {
         setLocation(previousLat, previousLong);
+        searchTags();
+    }
+}
+
+async function searchTags() {
+    /**
+     * @type { HTMLInputElement | undefined }
+     */
+    const searchTerm = document.getElementById("disc_word_search")?.value;
+
+    const lat = document.getElementById("latitude")?.value;
+    const lon = document.getElementById("longitude")?.value;
+
+    const response = await fetch(`/api/geotags?${new URLSearchParams({
+        latitude: lat,
+        longitude: lon,
+        /* rad: 25, */
+        search: searchTerm
+    }).toString()}`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+        }
+    });
+    /**
+     * @type {{ tagName: string; lat: number; long: number; tag:  string | null}[]}
+     */
+    const json = await response.json();
+
+    /**
+     * @type {HTMLDivElement}
+     */
+    const tagList = document.getElementById("discoveryResults");
+    tagList.innerHTML = '';
+
+    for (const tag of json) {
+        const el = document.createElement("li");
+        el.innerHTML = `${tag.tagName} (${tag.lat}, ${tag.long})${tag ? ` ${tag.tag}` : ''}`;
+        tagList.appendChild(el);
     }
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("tag-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(document.getElementById("tag-form"));
+        // any less bad way?
+        let data = {};
+        for (const [key, value] of formData) {
+            data[key] = value;
+        }
+
+        /*const response =*/ await fetch("/api/geotags", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        });
+        // do something?
+        //const json = await response.json();
+
+        await searchTags();
+    });
+
+    document.getElementById("discoveryFilterForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        searchTags();
+    });
+
     updateLocation();
 });
